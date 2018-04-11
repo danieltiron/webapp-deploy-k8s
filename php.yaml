@@ -1,0 +1,55 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: php-mysql-connect
+  labels:
+    personal_project: web-app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: php-mysql-connect
+  template:
+    metadata:
+      labels:
+        app: php-mysql-connect
+    spec:
+      containers:
+      - image: tiro/php-apache:1.0
+        imagePullPolicy: Always
+        name: php-mysql-connect
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1Gi
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: application
+        - mountPath: /etc/apache2/sites-available/000-default.conf
+          name: apache-setup
+      volumes:
+      - name: application
+        hostPath:
+          path: /Users/tironm/Projects/kubernetes-workshop/my_project/k8s/deploy_project/application
+      - name: apache-setup
+        hostPath:
+          path: /Users/tironm/Projects/kubernetes-workshop/my_project/k8s/deploy_project/webserver_setup/apache-config.conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    "personal_project": web-app
+spec:
+  ports:
+  - port: 80
+    nodePort: 32080
+    protocol: TCP
+  selector:
+    app: php-mysql-connect
+  type: LoadBalancer
