@@ -34,10 +34,10 @@ spec:
       volumes:
       - name: application
         hostPath:
-          path: /Users/tironm/Projects/kubernetes-workshop/my_project/k8s/deploy_project/application
+          path: <FULL_PATH_TO_WEBAPP_FOLDER>
       - name: apache-setup
         hostPath:
-          path: /Users/tironm/Projects/kubernetes-workshop/my_project/k8s/deploy_project/webserver_setup/apache-config.conf
+          path: <FULL_PATH_TO_APACHE_CONFIG_FROM_WEBSERVER_SETUP_FOLDER>
 ---
 apiVersion: v1
 kind: Service
