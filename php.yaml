@@ -48,8 +48,8 @@ metadata:
 spec:
   ports:
   - port: 80
-    nodePort: 32080
+    targetPort: 80
     protocol: TCP
+    name: http
   selector:
     app: php-mysql-connect
-  type: LoadBalancer

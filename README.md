@@ -9,10 +9,14 @@ Change placeholders with your values:
 
 `<FULL_PATH_TO_WEBAPP_FOLDER>`, `<FULL_PATH_TO_APACHE_CONFIG_FROM_WEBSERVER_SETUP_FOLDER>` from php.yaml
 
+`<BASE64_ENCRYPTED_CRT_FILE>`, `<BASE64_ENCRYPTED_KEY_FILE>` from secrets.yaml
+
 Using Makefile type:
 
 `make deploy` to deploy application
 
 `make help` for more details
 
-After the deploy is done you can access: http://192.168.99.100:32080/
+Add minikiube ip in hosts file to point webapp.local
+
+After the deploy is done you can access: https://webapp.local

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - hosts:
+      - webapp.local
+      secretName: credentials
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+  - host: webapp.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web
+          servicePort: 80
